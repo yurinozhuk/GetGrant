@@ -3,6 +3,7 @@ import logging
 from selenium.webdriver.support.ui import WebDriverWait
 
 from web_tests.configs.config import Config
+from web_tests.pages.common_xpath_locators import LoginPageLocators
 from web_tests.utilities.common_web_actions import CommonWebActions
 
 
@@ -36,3 +37,7 @@ class BasePage(CommonWebActions):
         """Navigate to the base URL specified in the Config class."""
         self.driver.get(Config.BASE_URL)
         self.log.info("Navigated to the base URL: %s", Config.BASE_URL)
+
+    def select_language(self):
+        self.mouse_over(LoginPageLocators.HOVER_ON_SELECTOR_LANGUAGE)
+        self.click_element(("xpath", LoginPageLocators.SELECT_LANGUAGE))

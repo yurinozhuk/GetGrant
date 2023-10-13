@@ -6,3 +6,4 @@ class Config:
         BASE_URL (str): The base URL of the website to be tested.
     """
     BASE_URL = "https://getgrant.eu/"
+    DEFAULT_WAIT = 10

@@ -9,10 +9,13 @@ class LoginPage(BasePage):
         super().__init__(driver)
 
     def click_login_button(self):
-        self.click("xpath", LoginPageLocators.LOGIN_BUTTON)
+        self.click_element(("xpath", LoginPageLocators.LOGIN_BUTTON))
 
     def mouse_over_login_button(self):
-        self.mouse_over("xpath", LoginPageLocators.LOGIN_REGISTER_BTNS)
+        self.mouse_over(LoginPageLocators.LOGIN_REGISTER_BTNS)
+
+
+
 
 
     # def perform_login(self, username, password):

@@ -1,10 +1,12 @@
+import logging
+from typing import Union
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions
-from web_tests.pages.common_xpath_locators import LoginPageLocators
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
-from selenium.common.exceptions import StaleElementReferenceException, NoSuchElementException
+from selenium.common.exceptions import NoSuchElementException, TimeoutException
 
+from web_tests.configs.config import Config
 from web_tests.utilities.logger import log
 
 
@@ -13,7 +15,7 @@ class CommonWebActions:
         self.driver = driver
         self.log = log
 
-    def get_element(self, locator: Union[tuple, dict], wait_time: int = DEFAULT_WAIT) -> WebDriverWait:
+    def get_element(self, locator: Union[tuple, dict], wait_time: int = Config.DEFAULT_WAIT) -> WebDriverWait:
         try:
             logging.info(f'Waiting for element: {locator}')
             element = WebDriverWait(self.driver, wait_time).until(
@@ -50,11 +52,10 @@ class CommonWebActions:
             try:
                 # Convert locator_type to uppercase
                 locator = (getattr(By, locator_type.upper()), locator_value)
-                element = wd_wait.until(expected_conditions.presence_of_element_located(locator))
+                wd_wait.until(expected_conditions.presence_of_element_located(locator))
             except NoSuchElementException:
                 self.log.error("Element with locator '%s: %s' not found.", locator_type, locator_value)
                 raise
-        return locator_value
 
     def execute_script(self, element, script):
         """
@@ -66,17 +67,12 @@ class CommonWebActions:
         """
         self.driver.execute_script(script, element)
 
-    def mouse_over(self, locator_type="xpath", locator_value=None):
+    def mouse_over(self, locator_value, locator_type="xpath", ):
         """
         Simulate mouse cursor over a given web element
         :param locator_type: str - locator type (e.g., "XPATH", "ID", "CSS_SELECTOR")
         :param locator_value: str - web element locator value
         """
-
-        # Check if locator_value is provided, if not, you should raise an error or handle it appropriately
-        if locator_value is None:
-            raise ValueError("locator_value must be provided")
-
         # Create an ActionChains object and move the mouse cursor to the specified element
         actions = ActionChains(self.driver)
 
@@ -87,5 +83,4 @@ class CommonWebActions:
         elif locator_type == "CSS_SELECTOR":
             element = self.driver.find_element(locator_value)
         # Add more elif blocks for other locator types as needed
-        element = self.wait_for_element(locator_type, locator_value)
         actions.move_to_element(element).perform()

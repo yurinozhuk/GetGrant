@@ -6,9 +6,10 @@ from web_tests.utilities.driver_utils import close_driver
 from web_tests.utilities.logger import log
 
 
-class TestLogin(BaseTest,LoginPageLocators):
+class TestLogin(BaseTest, LoginPageLocators):
     def test_click_login_button(self):
         login_page = LoginPage(self.driver)
+        login_page.select_language()
         login_page.mouse_over_login_button()
         login_page.click_login_button()
         log.info("Clicked the login button")

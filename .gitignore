@@ -1,5 +1,10 @@
+# Main files
 Lib/
 Scripts/
 pyvenv.cfg
 .idea
 .git
+
+# Allure serve report with all files
+/Allure_Report/
+
