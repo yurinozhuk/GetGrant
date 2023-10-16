@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 from web_tests.pages.base_page import BasePage
 from web_tests.pages.common_xpath_locators import LoginPageLocators
@@ -8,6 +9,7 @@ class LoginPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
 
+    @allure.step("Сlick login button")
     def click_login_button(self):
         self.click_element(("xpath", LoginPageLocators.LOGIN_BUTTON))
 

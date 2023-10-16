@@ -1,3 +1,6 @@
+import allure
+
+from web_tests.configs.config import Config
 from web_tests.pages.login_page import LoginPage
 from web_tests.tests.base_test import BaseTest
 from web_tests.pages.common_xpath_locators import LoginPageLocators
@@ -8,11 +11,16 @@ from web_tests.utilities.logger import log
 
 class TestLogin(BaseTest, LoginPageLocators):
     def test_click_login_button(self):
+        password = Config.PASSWORD
+        password2 = Config.PASSWORD2
         login_page = LoginPage(self.driver)
         login_page.select_language()
         login_page.mouse_over_login_button()
         login_page.click_login_button()
         log.info("Clicked the login button")
+        #TODO
+        login_page.input_passs(Config.PASSWORD)
+
         assert AssertionUtils.not_empty(login_page), "Login page object should not be empty."
         close_driver(self.driver)
 
