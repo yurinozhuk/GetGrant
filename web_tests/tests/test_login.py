@@ -11,18 +11,21 @@ from web_tests.utilities.logger import log
 
 class TestLogin(BaseTest, LoginPageLocators):
     def test_click_login_button(self):
-        password = Config.PASSWORD
-        password2 = Config.PASSWORD2
+        # password = Config.PASSWORD
+        # password2 = Config.PASSWORD2
         login_page = LoginPage(self.driver)
         login_page.select_language()
         login_page.mouse_over_login_button()
         login_page.click_login_button()
-        log.info("Clicked the login button")
-        #TODO
-        login_page.input_passs(Config.PASSWORD)
-
+        login_page.input_email()
+        login_page.input_password()
+        login_page.click_sign_in_button()
+        log.info("User is logged in")
         assert AssertionUtils.not_empty(login_page), "Login page object should not be empty."
         close_driver(self.driver)
+
+
+
 
 
 
