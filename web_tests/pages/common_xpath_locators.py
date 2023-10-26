@@ -15,3 +15,6 @@ class LoginPageLocators:
     PASSWORD_INPUT = SIGN_IN_FORM + ("//input[contains(@class, 'form-field-input') "
                                      "and contains(@autocomplete, 'new-password')]")
     SIGN_IN_BUTTON = "//div[contains(@class, 'form-btn') and .//span[text()='SIGN IN']]"
+
+    # <!-- Private page -->
+    PRIVATE_CONTAINER = "//div[contains(@class, 'private__container')]"
