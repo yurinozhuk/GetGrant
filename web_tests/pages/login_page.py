@@ -32,5 +32,6 @@ class LoginPage(BasePage):
         web_element = self.get_element(("xpath", LoginPageLocators.PASSWORD_INPUT))
         web_element.send_keys(password)
 
+    @allure.step("Click Sign-in button")
     def click_sign_in_button(self):
         self.click_element(("xpath", LoginPageLocators.SIGN_IN_BUTTON))
