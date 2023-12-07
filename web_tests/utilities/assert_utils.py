@@ -1,4 +1,4 @@
-"""Method that contains Custom Assertion class and methods"""
+"""Methods that contains Custom Assertion class and methods"""
 
 
 class AssertionUtils:
