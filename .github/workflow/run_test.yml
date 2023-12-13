@@ -2,7 +2,9 @@ name: Automated test
 
 # when is running
 on:
-  push
+  push:
+    branches:
+      - main
 
 jobs:
   test:
