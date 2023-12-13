@@ -1,6 +1,5 @@
 name: Automated test
 
-# when is running
 on:
   push
 
@@ -9,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: checkout repo content
+      - name: Checkout repo content
         uses: actions/checkout@v3
 
       - name: Set up Python
@@ -21,7 +20,10 @@ jobs:
         uses: browser-actions/setup-chrome@v1
 
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: |
+          pip install -r requirements.txt
+          pip freeze  # Display installed packages for debugging purposes
 
       - name: Run tests
-        run: pytest
+        run: |
+          pytest
