@@ -8,22 +8,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo content
+      - name: checkout repo content
         uses: actions/checkout@v3
 
-      - name: Set up Python
+      - name: set up Python
         uses: actions/setup-python@v4
         with:
           python-version: "3.10"
 
-      - name: Set up Chrome
-        uses: browser-actions/setup-chrome@v1
-
-      - name: Install dependencies
+      - name: Install Chrome
         run: |
-          pip install -r requirements.txt
-          pip freeze  # Display installed packages for debugging purposes
+          wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+          sudo dpkg -i google-chrome-stable_current_amd64.deb
+          sudo apt-get install -f
 
-      - name: Run tests
-        run: |
-          pytest
+      - name: install dependencies
+        run: pip install -r requirements.txt
+      - name: run tests
+        run: pytest
