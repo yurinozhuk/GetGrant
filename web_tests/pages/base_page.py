@@ -1,6 +1,7 @@
 import logging
 
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.chrome.options import Options
 
 from web_tests.configs.config import Config
 from web_tests.pages.common_xpath_locators import LoginPageLocators
