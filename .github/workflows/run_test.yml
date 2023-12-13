@@ -1,5 +1,6 @@
 name: Automated test
 
+# when is running
 on:
   push
 
