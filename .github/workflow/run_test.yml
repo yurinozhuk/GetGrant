@@ -1,9 +1,6 @@
 name: Automated test
 
-on:
-  push:
-    branches:
-      - main  # або інша гілка, на яку ви хочете реагувати
+on: [push]
 
 jobs:
   test:
