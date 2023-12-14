@@ -1,28 +1,27 @@
-name: Automated test
+name: Install Chrome and Run Tests
 
-on:
-  push
+on: [push, pull_request]
 
 jobs:
-  test:
+  install-chrome-and-run-tests:
     runs-on: ubuntu-latest
 
     steps:
-      - name: checkout repo content
-        uses: actions/checkout@v3
+    - name: Checkout repo content
+      uses: actions/checkout@v3
 
-      - name: set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.10"
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.10"
 
-      - name: install Chrome
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y google-chrome-stable
+    - name: Install dependencies
+      run: pip install -r requirements.txt
 
-      - name: install dependencies
-        run: pip install -r requirements.txt
+    - name: Install Chrome
+      run: |
+        sudo apt update
+        sudo apt install google-chrome-stable
 
-      - name: run tests
-        run: pytest
+    - name: Run Tests
+      run: pytest
