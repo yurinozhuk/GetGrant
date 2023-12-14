@@ -1,25 +1,30 @@
 name: Automated test
 
 on:
-  push
+  push:
+    branches:
+      - main  # або інша гілка, на яку ви хочете реагувати
 
 jobs:
   test:
     runs-on: ubuntu-latest
 
-  steps:
-    - name: checkout repo content
-      uses: actions/checkout@v3
+    steps:
+      - name: checkout repo content
+        uses: actions/checkout@v3
 
-    - name: set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: "3.10"
+      - name: set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
 
-    - name: install Chrome
-      uses: sudo apt-get install google-chrome-stable
+      - name: install Chrome
+        run: |
+          sudo apt-get update
+          sudo apt-get install google-chrome-stable
 
-    - name: install dependencies
-      run: pip install -r requirements.txt
-    - name: run tests
-      run: pytest
+      - name: install dependencies
+        run: pip install -r requirements.txt
+
+      - name: run tests
+        run: pytest
