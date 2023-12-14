@@ -1,6 +1,7 @@
 name: Automated test
 
-on: [push]
+on:
+  push
 
 jobs:
   test:
