@@ -33,4 +33,4 @@ jobs:
 
     - name: Run Tests with xvfb
       run: |
-        xvfb-run -a python my_tests.py
+        xvfb-run -a python web_tests
