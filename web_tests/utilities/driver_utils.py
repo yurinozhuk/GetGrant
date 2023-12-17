@@ -17,7 +17,7 @@ def get_driver(browser="chrome", headless=True):
 
     if headless:
         chrome_options.add_argument("--headless")
-        chrome_options.add_argument("window-size=1200x600")
+        chrome_options.add_argument("window-size=1920x1080")
 
         # Додавання опцій для зберігання знімків у вигляді артефактів
         if "CI" in os.environ:
