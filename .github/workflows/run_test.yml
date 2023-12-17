@@ -33,4 +33,4 @@ jobs:
 
     - name: Run Tests with xvfb
       run: |
-        xvfb-run pytest
+        xvfb-run -a your-test-command
