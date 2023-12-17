@@ -28,13 +28,4 @@ jobs:
         sudo apt-get install -y google-chrome-stable
 
     - name: Run Tests
-      run: pytest --headless --alluredir=./allure-results
-
-    - name: Install Allure
-      run: |
-        sudo apt-add-repository -y ppa:qameta/allure
-        sudo apt-get update 
-        sudo apt-get install -y allure
-
-    - name: Generate Allure Report
-      run: allure generate --clean && allure open
+      run: pytest
