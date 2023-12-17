@@ -5,6 +5,7 @@ from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
+from selenium.webdriver.support import expected_conditions as EC
 
 from web_tests.configs.config import Config
 from web_tests.utilities.logger import log
@@ -67,20 +68,32 @@ class CommonWebActions:
         """
         self.driver.execute_script(script, element)
 
-    def mouse_over(self, locator_value, locator_type="xpath", ):
+    def mouse_over(self, locator_value, locator_type="xpath"):
         """
         Simulate mouse cursor over a given web element
-        :param locator_type: str - locator type (e.g., "XPATH", "ID", "CSS_SELECTOR")
+        :param locator_type: str - locator type (e.g., "xpath", "id", "css selector")
         :param locator_value: str - web element locator value
         """
         # Create an ActionChains object and move the mouse cursor to the specified element
         actions = ActionChains(self.driver)
 
-        if locator_type == "xpath":
-            element = self.driver.find_element("xpath", locator_value)
-        elif locator_type == "ID":
-            element = self.driver.find_element(locator_value)
-        elif locator_type == "CSS_SELECTOR":
-            element = self.driver.find_element(locator_value)
-        # Add more elif blocks for other locator types as needed
+        # Map the provided locator_type to the corresponding By class
+        locator_type_map = {
+            "xpath": By.XPATH,
+            "id": By.ID,
+            "css selector": By.CSS_SELECTOR,
+            # Add more mappings as needed
+        }
+
+        # Use the appropriate By class for the specified locator_type
+        locator_type = locator_type.lower()
+        if locator_type not in locator_type_map:
+            raise ValueError(f"Unsupported locator type: {locator_type}")
+
+        # Wait for the element to be present and visible
+        element = WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((locator_type_map[locator_type], locator_value))
+        )
+
+        # Move the mouse cursor to the specified element
         actions.move_to_element(element).perform()

@@ -2,7 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 
 
-def get_driver(browser="chrome", headless=False):
+def get_driver(browser="chrome", headless=True):
     """
     Get a WebDriver instance for the specified browser.
 
