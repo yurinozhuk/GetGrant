@@ -15,6 +15,7 @@ def get_driver(browser="chrome", headless=True):
         chrome_options = ChromeOptions()
         if headless:
             chrome_options.add_argument("--headless")
+            chrome_options.add_argument("window-size=1200x600")
         chrome_options.add_argument("--start-maximized")
         return webdriver.Chrome(options=chrome_options)
     else:
