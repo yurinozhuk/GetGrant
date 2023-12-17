@@ -17,6 +17,9 @@ jobs:
       with:
         python-version: "3.10"
 
+    - name: Install curl
+      run: sudo apt-get install -y curl
+
     - name: Install Selenoid
       run: |
         sudo curl -sSLO https://github.com/aerokube/cm/releases/download/1.9.1/cm_linux_amd64
@@ -31,3 +34,4 @@ jobs:
 
     - name: Run tests
       run: pytest --driver Remote --capability browserName chrome
+
