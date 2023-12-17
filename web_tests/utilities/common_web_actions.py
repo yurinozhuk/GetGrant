@@ -4,7 +4,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
-from selenium.common.exceptions import NoSuchElementException, TimeoutException
+from selenium.common.exceptions import NoSuchElementException, TimeoutException, ElementNotInteractableException
 from selenium.webdriver.support import expected_conditions as EC
 
 from web_tests.configs.config import Config
@@ -68,23 +68,26 @@ class CommonWebActions:
         """
         self.driver.execute_script(script, element)
 
-    def mouse_over(self, locator_value, locator_type="xpath"):
-        actions = ActionChains(self.driver)
+    def mouse_over(self, locator_value, locator_type="xpath", timeout=60):
+        """
+        Simulate mouse cursor over a given web element
+        :param locator_type: str - locator type (e.g., "XPATH", "ID", "CSS_SELECTOR")
+        :param locator_value: str - web element locator value
+        :param timeout: int - maximum time to wait for the element to be visible
+        """
+        try:
+            # Wait for the element to be visible
+            element = WebDriverWait(self.driver, timeout).until(
+                EC.visibility_of_element_located((getattr(By, locator_type.upper()), locator_value))
+            )
 
-        locator_type_map = {
-            "xpath": By.XPATH,
-            "id": By.ID,
-            "css selector": By.CSS_SELECTOR,
-            # Add more mappings as needed
-        }
+            # Check if the element is both visible and enabled
+            if element.is_displayed() and element.is_enabled():
+                # Create an ActionChains object and move the mouse cursor to the specified element
+                actions = ActionChains(self.driver)
+                actions.move_to_element(element).perform()
+            else:
+                raise ElementNotInteractableException("Element is not visible and enabled.")
 
-        locator_type = locator_type.lower()
-        if locator_type not in locator_type_map:
-            raise ValueError(f"Unsupported locator type: {locator_type}")
-
-        # Wait for the element to be present and visible
-        element = WebDriverWait(self.driver, 30).until(
-            EC.element_to_be_clickable((locator_type_map[locator_type], locator_value))
-        )
-
-        actions.move_to_element(element).perform()
+        except TimeoutException:
+            raise TimeoutException(f"Timed out waiting for element with {locator_type}='{locator_value}' to be visible.")
