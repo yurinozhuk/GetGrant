@@ -26,3 +26,18 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y google-chrome-stable
+
+    - name: Install Selenium
+      run: |
+        pip install selenium
+
+    - name: Download and run Selenium Standalone Server (Selenoid)
+      run: |
+        wget -O selenoid https://github.com/aerokube/selenoid/releases/download/v1.10.3/selenoid_linux_amd64
+        chmod +x selenoid
+        ./selenoid start --vnc
+
+    - name: Run Tests
+      run: |
+        python web_tests
+
