@@ -27,10 +27,10 @@ jobs:
         sudo chmod +x /usr/local/bin/cm
 
     - name: Test cm installation
-      run: cm version
+      run: /usr/local/bin/cm version
 
     - name: Start Selenoid
-      run: sudo cm selenoid start --vnc
+      run: sudo /usr/local/bin/cm selenoid start --vnc
 
     - name: Install dependencies
       run: |
