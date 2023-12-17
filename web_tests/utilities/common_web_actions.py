@@ -83,7 +83,7 @@ class CommonWebActions:
             raise ValueError(f"Unsupported locator type: {locator_type}")
 
         # Wait for the element to be present and visible
-        element = WebDriverWait(self.driver, 10).until(
+        element = WebDriverWait(self.driver, 30).until(
             EC.element_to_be_clickable((locator_type_map[locator_type], locator_value))
         )
 
