@@ -25,12 +25,10 @@ jobs:
         sudo curl -sSLO https://github.com/aerokube/cm/releases/download/1.9.1/cm_linux_amd64
         sudo mv cm_linux_amd64 /usr/local/bin/cm
         sudo chmod +x /usr/local/bin/cm
-
-    - name: Test cm installation
-      run: /usr/local/bin/cm version
+        sudo cm version
 
     - name: Start Selenoid
-      run: sudo /usr/local/bin/cm selenoid start --vnc
+      run: sudo cm selenoid start --vnc
 
     - name: Install dependencies
       run: |
