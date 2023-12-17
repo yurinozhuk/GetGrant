@@ -1,4 +1,4 @@
-name: Install Chrome and Run Tests
+name: Install Chrome and Run Tests CI
 
 on:
   push:
