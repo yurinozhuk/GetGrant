@@ -1,11 +1,11 @@
-name: Install Chrome and Run Tests CI
+name: Install Selenoid and Run UI Tests CI
 
 on:
   push:
   pull_request:
 
 jobs:
-  install-chrome-and-run-tests:
+  install-selenoid-and-run-tests:
     runs-on: ubuntu-latest
 
     steps:
@@ -17,14 +17,17 @@ jobs:
       with:
         python-version: "3.10"
 
-    - name: Install Chrome
+    - name: Install Selenoid
       run: |
-        sudo apt-get update
-        sudo apt-get install -y google-chrome-stable
+        sudo curl -sSLO https://github.com/aerokube/cm/releases/download/1.9.1/cm_linux_amd64
+        sudo mv cm_linux_amd64 /usr/local/bin/cm
+        sudo chmod +x /usr/local/bin/cm
+        sudo cm selenoid start --vnc
+
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
     - name: Run tests
-      run: pytest
+      run: pytest --driver Remote --capability browserName chrome
