@@ -33,4 +33,4 @@ jobs:
 
     - name: Run Entire Project
       run: |
-        xvfb-run -a web_tests
+        xvfb-run -a GetGrant
