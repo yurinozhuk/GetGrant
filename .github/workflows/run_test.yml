@@ -25,7 +25,12 @@ jobs:
         sudo curl -sSLO https://github.com/aerokube/cm/releases/download/1.9.1/cm_linux_amd64
         sudo mv cm_linux_amd64 /usr/local/bin/cm
         sudo chmod +x /usr/local/bin/cm
-        sudo cm selenoid start --vnc
+
+    - name: Test cm installation
+      run: cm version
+
+    - name: Start Selenoid
+      run: sudo cm selenoid start --vnc
 
     - name: Install dependencies
       run: |
@@ -34,4 +39,3 @@ jobs:
 
     - name: Run tests
       run: pytest --driver Remote --capability browserName chrome
-
