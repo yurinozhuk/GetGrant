@@ -90,4 +90,11 @@ class CommonWebActions:
                 raise ElementNotInteractableException("Element is not visible and enabled.")
 
         except TimeoutException:
-            raise TimeoutException(f"Timed out waiting for element with {locator_type}='{locator_value}' to be visible.")
+            # Add logging to help diagnose the issue
+            logging.error(f"Timed out waiting for element with {locator_type}='{locator_value}' to be visible.")
+            logging.error(f"Page source:\n{self.driver.page_source}")
+            raise
+        except Exception as e:
+            # Log any other exceptions that might occur
+            logging.error(f"An error occurred: {str(e)}")
+            raise
