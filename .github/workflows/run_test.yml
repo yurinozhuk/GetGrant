@@ -1,6 +1,8 @@
 name: Install Chrome and Run Tests
 
-on: [push, pull_request]
+on:
+  push:
+  pull_request:
 
 jobs:
   install-chrome-and-run-tests:
@@ -11,17 +13,19 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Set up Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v2
       with:
         python-version: "3.10"
 
     - name: Install dependencies
-      run: pip install -r requirements.txt
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
 
     - name: Install Chrome
       run: |
-        sudo apt update
-        sudo apt install google-chrome-stable
+        sudo apt-get update
+        sudo apt-get install -y google-chrome-stable
 
     - name: Run Tests
       run: pytest
