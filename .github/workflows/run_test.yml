@@ -27,12 +27,5 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y google-chrome-stable
 
-    - name: Run Tests and Generate Allure Report
-      run: |
-        python -m pytest --alluredir=target/allure-results
-
-    - name: Publish Allure Report as an Artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: allure-results
-        path: target/allure-results
+    - name: Run Tests
+      run: pytest
