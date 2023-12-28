@@ -25,7 +25,7 @@ def get_driver(browser="chrome", headless=False):
         chrome_options.add_argument("--start-maximized")
 
         return webdriver.Remote(
-            command_executor='http:selenium-hub:4444/wd/hub',
+            command_executor='http://selenium-hub:4444/wd/hub',
             # command_executor='http://127.0.0.1:4444/wd/hub',
             options=chrome_options)
 
