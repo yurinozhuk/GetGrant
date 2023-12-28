@@ -15,6 +15,9 @@ import os
 
 
 from dotenv import load_dotenv
+
 load_dotenv()
 EMAIL = os.getenv('Email')
 PASSWORD = os.getenv('Password')
+SELENIUM_GRID_URL = os.getenv("SELENIUM_GRID_URL")
+SELENIUM_GRID_PORT = os.getenv("SELENIUM_GRID_PORT")
