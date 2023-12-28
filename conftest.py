@@ -1,6 +1,6 @@
 import allure
 import pytest
-from selenium.webdriver.chrome.webdriver import WebDriver
+from selenium.webdriver.remote.webdriver import WebDriver
 
 from web_tests.configs.config import Config
 from web_tests.pages.login_page import LoginPage

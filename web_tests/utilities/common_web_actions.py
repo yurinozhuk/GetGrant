@@ -67,7 +67,7 @@ class CommonWebActions:
         """
         self.driver.execute_script(script, element)
 
-    def mouse_over(self, locator_value, locator_type="xpath", ):
+    def mouse_over(self, locator_value, locator_type="xpath" ):
         """
         Simulate mouse cursor over a given web element
         :param locator_type: str - locator type (e.g., "XPATH", "ID", "CSS_SELECTOR")

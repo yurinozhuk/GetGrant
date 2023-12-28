@@ -1,4 +1,5 @@
 import os
+from time import sleep
 
 import allure
 
@@ -21,6 +22,7 @@ class TestLogin(BaseTest, LoginPageLocators):
         login_page = LoginPage(self.driver)
         login_page.select_language()
         login_page.mouse_over_login_button()
+        sleep(5)
         login_page.click_login_button()
         login_page.input_email(EMAIL)
         login_page.input_password(PASSWORD)
