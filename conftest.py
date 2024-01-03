@@ -12,7 +12,7 @@ def driver(request):
     """
     Fixture to initialize and return the WebDriver instance.
     """
-    driver = get_driver()
+    driver = get_driver(remote=Config.REMOTE_)
     driver.get(Config.BASE_URL)
     request.cls.driver = driver
     yield driver

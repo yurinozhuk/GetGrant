@@ -1,4 +1,4 @@
-from env import SELENIUM_GRID_URL
+from env import SELENIUM_GRID_URL, REMOTE
 
 
 class Config:
@@ -12,4 +12,5 @@ class Config:
     DEFAULT_WAIT = 10
     SELENIUM_GRID_URL_ = SELENIUM_GRID_URL
     SELENIUM_GRID_PORT = "4444"
+    REMOTE_ = REMOTE
 
