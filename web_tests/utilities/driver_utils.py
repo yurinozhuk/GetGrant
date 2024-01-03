@@ -27,7 +27,7 @@ def get_driver(browser="chrome", headless=False):
         chrome_options.add_argument("--start-maximized")
 
         return webdriver.Remote(
-            command_executor=f'http://{Config.SELENIUM_GRID_URL}:{Config.SELENIUM_GRID_PORT}/wd/hub',
+            command_executor=f'http://{Config.SELENIUM_GRID_URL_}:{Config.SELENIUM_GRID_PORT}/wd/hub',
             options=chrome_options)
 
         if headless:

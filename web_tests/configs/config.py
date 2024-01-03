@@ -1,3 +1,6 @@
+from env import SELENIUM_GRID_URL
+
+
 class Config:
     """
     Config class to store global configuration settings.
@@ -7,5 +10,6 @@ class Config:
     """
     BASE_URL = "https://getgrant.eu/"
     DEFAULT_WAIT = 10
-    SELENIUM_GRID_URL = "selenium-hub"
+    SELENIUM_GRID_URL_ = SELENIUM_GRID_URL
     SELENIUM_GRID_PORT = "4444"
+
